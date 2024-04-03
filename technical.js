@@ -21,54 +21,40 @@ const quizData = [
     answer: 'Charset in both html and xhtml is “text/html',
   },
   {
-    question: 'What is the tallest mountain in the world?',
-    options: ['Mount Everest', 'K2', 'Kangchenjunga', 'Makalu'],
-    answer: 'Mount Everest',
+    question: 'Which of the following is an appropriate value for the overflow element?',
+    options: ['scroll', 'hidden','auto', 'all of the mentioned'],
+    answer: 'all of the mentioned',
   },
   {
-    question: 'Which is the largest ocean on Earth?',
+    question: 'Which of the following data structure can provide efficient searching of the elements?',
+    options: ['binary search tree','unordered lists','2-3 tree','treap',],
+    answer: '2-3 tree',
+  },
+  {
+    question: 'What is the time complexity for searching a key or integer in Van Emde Boas data structure?',
+    options: ['O (M!)', 'O (log M!)', 'O (log (log M))', 'O (M2)'],
+    answer: 'O (log (log M))',
+  },
+  {
+    question: ' Which of the following is the self-adjusting binary search tree?',
+    options: ['Pablo  AVL Tree',' Splay Tree','Top Tree',' Ternary Tree',],
+    answer: ' Splay Tree',
+  },
+  {
+    question: 'What is the correct fqdn for service "nginx" in namespace "app"?',
+    options: ['nginx.local', 'nginx.svc.cluster.local', 'nginx.app.cluster.local', 'nginx.app.svc.cluster.local'],
+    answer: 'nginx.app.svc.cluster.local',
+  },
+  {
+    question: 'Which of the following command displays all of the pictures that are presently installed on the system?',
     options: [
-      'Pacific Ocean',
-      'Indian Ocean',
-      'Atlantic Ocean',
-      'Arctic Ocean',
-    ],
-    answer: 'Pacific Ocean',
+      'See images','Docker see images','Docker images','Docker pictures',],
+    answer: 'Docker images',
   },
   {
-    question: 'What is the chemical symbol for gold?',
-    options: ['Au', 'Ag', 'Cu', 'Fe'],
-    answer: 'Au',
-  },
-  {
-    question: 'Who painted the Mona Lisa?',
-    options: [
-      'Pablo Picasso',
-      'Vincent van Gogh',
-      'Leonardo da Vinci',
-      'Michelangelo',
-    ],
-    answer: 'Leonardo da Vinci',
-  },
-  {
-    question: 'Which planet is known as the Red Planet?',
-    options: ['Mars', 'Venus', 'Mercury', 'Uranus'],
-    answer: 'Mars',
-  },
-  {
-    question: 'What is the largest species of shark?',
-    options: [
-      'Great White Shark',
-      'Whale Shark',
-      'Tiger Shark',
-      'Hammerhead Shark',
-    ],
-    answer: 'Whale Shark',
-  },
-  {
-    question: 'Which animal is known as the King of the Jungle?',
-    options: ['Lion', 'Tiger', 'Elephant', 'Giraffe'],
-    answer: 'Lion',
+    question: 'Once the container has stopped, which of the following command you will use to remove a container?',
+    options: ['Docker remove', 'Docker destroy', 'Docker rm', 'Docker del'],
+    answer: 'Docker rm',
   },
 ];
 
@@ -127,19 +113,24 @@ function checkAnswer() {
   const selectedOption = document.querySelector('input[name="quiz"]:checked');
   if (selectedOption) {
     const answer = selectedOption.value;
-    if (answer === quizData[currentQuestion].answer) {
+    const correctAnswer = quizData[currentQuestion].answer;
+    if (answer === correctAnswer) {
       score++;
+      selectedOption.parentNode.style.backgroundColor = 'lightgreen'; // Green for correct answer
     } else {
       incorrectAnswers.push({
         question: quizData[currentQuestion].question,
         incorrectAnswer: answer,
-        correctAnswer: quizData[currentQuestion].answer,
+        correctAnswer: correctAnswer,
       });
+      selectedOption.parentNode.style.backgroundColor = 'red'; // Red for incorrect answer
     }
     currentQuestion++;
-    selectedOption.checked = false;
     if (currentQuestion < quizData.length) {
-      displayQuestion();
+      setTimeout(() => {
+        displayQuestion();
+        selectedOption.parentNode.style.backgroundColor = ''; // Reset background color
+      }, 1000); // Delay to display next question after 1 second
     } else {
       displayResult();
     }
