@@ -121,24 +121,30 @@ function checkAnswer() {
   const selectedOption = document.querySelector('input[name="quiz"]:checked');
   if (selectedOption) {
     const answer = selectedOption.value;
-    if (answer === quizData[currentQuestion].answer) {
+    const correctAnswer = quizData[currentQuestion].answer;
+    if (answer === correctAnswer) {
       score++;
+      selectedOption.parentNode.style.backgroundColor = 'lightgreen'; // Green for correct answer
     } else {
       incorrectAnswers.push({
         question: quizData[currentQuestion].question,
         incorrectAnswer: answer,
-        correctAnswer: quizData[currentQuestion].answer,
+        correctAnswer: correctAnswer,
       });
+      selectedOption.parentNode.style.backgroundColor = 'red'; // Red for incorrect answer
     }
     currentQuestion++;
-    selectedOption.checked = false;
     if (currentQuestion < quizData.length) {
-      displayQuestion();
+      setTimeout(() => {
+        displayQuestion();
+        selectedOption.parentNode.style.backgroundColor = ''; // Reset background color
+      }, 1000); // Delay to display next question after 1 second
     } else {
       displayResult();
     }
   }
 }
+
 
 function displayResult() {
     quizContainer.style.display = 'none';
