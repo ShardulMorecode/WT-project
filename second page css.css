@@ -1,0 +1,35 @@
+body {
+    font-family: 'Poppins',sans-serif;
+    background: #b9b3a9;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  p{
+    font-size: 17px;
+    text-align: left;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
